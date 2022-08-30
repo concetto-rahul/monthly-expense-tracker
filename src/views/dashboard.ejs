@@ -1,0 +1,64 @@
+<div class="container-fluid">
+  <!-- Page Heading -->
+  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+    <div class="w-30">
+      <select
+        class="form-control"
+        name="month_year"
+      >
+        <% data.monthYearList.forEach((val)=>{ %>
+        <option value="<%= val.id %>" <%= data.currentMonthYear==val.id && "selected" %>><%= val.name %></option>
+        <% }) %>
+      </select>
+    </div>
+  </div>
+
+  <div class="row">
+    <% data.categories.forEach((val)=>{ %>
+    <div class="col-lg-4">
+      <div class="card shadow mb-4">
+        <div class="card-header py-3 d-flex justify-content-between">
+          <h6 class="m-0 font-weight-bold text-primary"><%= val.name %></h6>
+          <a href="#" class="btn btn-primary btn-circle btn-sm">
+            <i class="fa fa-plus"></i>
+          </a>
+        </div>
+        <div class="card-body">
+          <% if(val.subCategory.length>0){ %> <% subTotalAmount=0 %>
+          <table
+            class="table table-borderless table-sm table-hover table-responsive-sm"
+          >
+            <tbody>
+              <% val.subCategory.map((subVal)=>{ %> <%
+              subTotalAmount+=subVal.amount %>
+              <tr>
+                <td>
+                  <a
+                    data-catID="<%= val.id %>"
+                    data-subID="<%= subVal.id %>"
+                    data-subName="<%= subVal.name %>"
+                    class="btn btn-info btn-circle btn-sm enterAmountBtn"
+                  >
+                    <i class="fa fa-plus"></i>
+                  </a>
+                </td>
+                <td><%= subVal.name %></td>
+                <td class="text-right"><%= subVal.amount.toFixed(2) %></td>
+              </tr>
+              <% }) %>
+              <tr>
+                <th scope="row"></th>
+                <th>Total</th>
+                <th class="text-right"><%= subTotalAmount.toFixed(2) %></th>
+                <th></th>
+              </tr>
+            </tbody>
+          </table>
+          <% } %>
+        </div>
+      </div>
+    </div>
+    <% }) %>
+  </div>
+</div>
