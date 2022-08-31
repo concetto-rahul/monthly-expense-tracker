@@ -14,7 +14,6 @@ dashboardController.index = async (req, res) => {
     todaysDate: moment().format("YYYY-MM-DD"),
     currentMonthYear: req.query?.month_year || moment().format("YYYY-MM"),
   };
-  console.log(data);
   try {
     const {
       data: { monthYearList },
@@ -37,7 +36,6 @@ dashboardController.index = async (req, res) => {
       id: moment(val.dateMonthYear).format("YYYY-MM"),
       name: moment(val.dateMonthYear).format("MMMM, YYYY"),
     }));
-    console.log(data);
   } catch (error) {
     console.log("dashboard error", error);
   }
