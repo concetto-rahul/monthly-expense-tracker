@@ -5,15 +5,15 @@
 exports.up = function (knex) {
   return knex.schema.createTable("transactions", function (table) {
     table.increments("id");
-    table.integer("cat_id", 11).notNullable();
-    table.integer("sub_cat_id", 11).notNullable();
+    table.integer("cat_id", 11).unsigned().notNullable();
+    table.integer("sub_cat_id", 11).unsigned().notNullable();
     table.decimal("amount", 13, 2);
     table.date("transaction_date").notNullable();
     table.text("description", "longtext");
     table.datetime("add_date").notNullable();
-    table.integer("add_by", 11).notNullable();
+    table.integer("add_by", 11).unsigned().notNullable();
     table.datetime("update_date").notNullable();
-    table.integer("update_by", 11).notNullable();
+    table.integer("update_by", 11).unsigned().notNullable();
     table.foreign("cat_id").references("id").inTable("expense_categories");
     table
       .foreign("sub_cat_id")
